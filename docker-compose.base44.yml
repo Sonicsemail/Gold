@@ -8,7 +8,7 @@ services:
     command: ["sh", "-c", "ln -sf 'gold-events-directory (1).html' /usr/share/nginx/html/index.html && chmod 755 /usr/share/nginx/html && exec nginx -g 'daemon off;'"]
     restart: on-failure
     healthcheck:
-      test: ["CMD", "wget", "-q", "--spider", "http://localhost:80/"]
+      test: ["CMD", "wget", "-q", "--spider", "http://127.0.0.1:80/"]
       interval: 10s
       timeout: 3s
       retries: 3
