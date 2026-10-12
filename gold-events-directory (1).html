@@ -99,7 +99,7 @@ footer{padding:28px 0;color:var(--mute);font-size:14px}
       <ul><li>Top of results, highlighted</li><li>Unlimited categories and photos</li><li>Enquiry inbox for customers</li><li>Home page spotlight</li></ul>
       <button class="btn ghost" data-plan="Premium">Choose Premium</button></div>
     </div>
-    <p class="note" style="margin-top:16px">All prices and payments are in US dollars (USD) only. Prices are placeholders; payment in this demo is simulated.</p>
+    <p class="note" style="margin-top:16px">All prices and payments are in US dollars (USD) only. Payment is processed securely via PayPal.</p>
   </div>
 </section>
 <div class="wrap"><footer>Gold Events directory. Free for customers, paid listings for businesses.</footer></div>
@@ -116,10 +116,12 @@ footer{padding:28px 0;color:var(--mute);font-size:14px}
     <label>Contact email or phone<input id="fe" maxlength="60"></label>
     <label>Plan<select id="fp"><option>Basic</option><option>Featured</option><option>Premium</option></select></label>
     <div class="note" id="err" role="alert"></div>
-    <div class="row"><button class="btn gold" id="pay">Pay and publish</button><button class="btn ghost" data-close>Cancel</button></div>
+    <div id="paypal-container" style="margin-top:6px"></div>
+    <div class="row"><button class="btn ghost" data-close>Cancel</button></div>
   </div>
 </dialog>
 
+<script src="https://www.paypal.com/sdk/js?client-id=__PAYPAL_CLIENT_ID__&currency=USD&intent=capture"></script>
 <script>
 var CATS=["Venues","Catering","DJs and music","Photography","Videography","Planners","Florists","Decor and lighting","Rentals","Photo booths","Mascots","Bouncy castles","Valet","Entertainers","Speakers","Audio visual","Bars and drinks","Cakes and desserts","Transport","Event staff","Security","Ticketing","Advertising","Billboard advertising"];
 var PRICE={Basic:19,Featured:49,Premium:99},RANK={Premium:0,Featured:1,Basic:2};
@@ -157,19 +159,36 @@ document.addEventListener('click',function(e){
   var ch=t.closest('.chip');if(ch){$('cat').value=ch.dataset.c;render();return}
   var cd=t.closest('.card');if(cd){var x=data[+cd.dataset.i];
    $('viewBody').innerHTML='<h3>'+esc(x.n)+'</h3><p class="meta">'+esc(x.c)+' in '+esc(x.ci)+'</p><p>'+esc(x.d)+'</p><p><b>Contact:</b> '+esc(x.e)+'</p>';$('view').showModal();return}
-  var pl=t.closest('[data-plan]');if(pl){$('fp').value=pl.dataset.plan;$('err').textContent='';$('list').showModal()}
+  var pl=t.closest('[data-plan]');if(pl){$('fp').value=pl.dataset.plan;$('err').textContent='';$('list').showModal();renderPayPal()}
 });
 $('go').onclick=render;$('q').oninput=render;$('cat').onchange=render;$('city').onchange=render;
-$('pay').onclick=function(){
-  var v=function(i){return $(i).value.trim()};
-  if(!v('fn')||!v('fci')||!v('fd')||!v('fe')){$('err').textContent='Fill in every field to publish your listing.';return}
-  var p=$('fp').value;
-  data.push({n:v('fn'),c:$('fc').value,ci:v('fci'),d:v('fd'),e:v('fe'),p:p});
-  ['fn','fd','fe'].forEach(function(i){$(i).value=''});
-  $('list').close();refreshCities();$('q').value='';$('cat').value='';$('city').value='';render();
-  $('count').textContent='Published on the '+p+' plan (US$'+PRICE[p]+'/month, simulated). '+$('count').textContent;
-  window.scrollTo(0,0);
-};
+function renderPayPal(){
+  var pc=$('paypal-container');pc.innerHTML='';
+  if(typeof paypal==='undefined'){pc.innerHTML='<p class="note">Payment is not configured. Set a PayPal client ID to enable checkout.</p>';return}
+  paypal.Buttons({
+    style:{layout:'vertical',color:'gold',shape:'pill',label:'pay'},
+    onClick:function(){
+      var v=function(i){return $(i).value.trim()};
+      if(!v('fn')||!v('fci')||!v('fd')||!v('fe')){$('err').textContent='Fill in every field to publish your listing.';return Promise.reject(new Error('incomplete'))}
+      $('err').textContent='';
+    },
+    createOrder:function(data,actions){
+      return actions.order.create({purchase_units:[{amount:{value:PRICE[$('fp').value].toFixed(2),currency_code:'USD'}}]});
+    },
+    onApprove:function(data,actions){
+      return actions.order.capture().then(function(){
+        var v=function(i){return $(i).value.trim()};
+        var p=$('fp').value;
+        data.push({n:v('fn'),c:$('fc').value,ci:v('fci'),d:v('fd'),e:v('fe'),p:p});
+        ['fn','fd','fe'].forEach(function(i){$(i).value=''});
+        $('list').close();refreshCities();$('q').value='';$('cat').value='';$('city').value='';render();
+        $('count').textContent='Published on the '+p+' plan (US$'+PRICE[p]+'/month). '+$('count').textContent;
+        window.scrollTo(0,0);
+      });
+    },
+    onError:function(){$('err').textContent='Payment could not be completed. Please try again.'}
+  }).render(pc);
+}
 setup();render();
 </script>
 </body>
