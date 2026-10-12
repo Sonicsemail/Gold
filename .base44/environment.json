@@ -2,5 +2,7 @@
   "previewPort": 3000,
   "healthPath": "/",
   "startCommand": "docker compose -f docker-compose.base44.yml up -d",
-  "secrets": []
+  "secrets": [
+    {"name": "PAYPAL_CLIENT_ID", "description": "PayPal REST app client ID from developer.paypal.com (Dashboard > My Apps & Credentials > Live tab > Create App)", "requiredAtBoot": true, "generatedForDevelopment": true}
+  ]
 }

@@ -1,0 +1,14 @@
+server {
+    listen 80;
+    server_name _;
+    root /usr/share/nginx/html;
+    gzip off;
+
+    location / {
+        sub_filter '__PAYPAL_CLIENT_ID__' '${PAYPAL_CLIENT_ID}';
+        sub_filter_once off;
+        sub_filter_types text/html;
+        index index.html;
+        try_files $uri $uri/ /index.html;
+    }
+}

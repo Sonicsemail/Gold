@@ -5,6 +5,10 @@ services:
       - "3000:80"
     volumes:
       - .:/usr/share/nginx/html
+      - ./nginx.conf.template:/etc/nginx/templates/default.conf.template:ro
+    env_file:
+      - ./.env.base44-defaults
+      - /run/base44/app.env
     command: ["sh", "-c", "ln -sf 'gold-events-directory (1).html' /usr/share/nginx/html/index.html && chmod 755 /usr/share/nginx/html && exec nginx -g 'daemon off;'"]
     restart: on-failure
     healthcheck:
