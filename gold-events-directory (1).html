@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Gold Events – Find event professionals</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&family=Instrument+Sans:wght@400;500;600&display=swap">
+<style>
+:root{--bg:#F2F4F1;--card:#fff;--ink:#16223B;--mute:#5B6678;--line:#D9DED8;--gold:#B8892B;--goldbg:#F6EAC9;--teal:#1D6B66;--r:14px;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0F1626;--card:#18213A;--ink:#EEF1F7;--mute:#9AA6BD;--line:#2B3656;--goldbg:#3A3017;--gold:#E3B54F;--teal:#5CC1BA}}
+:root[data-theme="dark"]{--bg:#0F1626;--card:#18213A;--ink:#EEF1F7;--mute:#9AA6BD;--line:#2B3656;--goldbg:#3A3017;--gold:#E3B54F;--teal:#5CC1BA}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 "Instrument Sans",system-ui,sans-serif}
+h1,h2,h3{font-family:"Bricolage Grotesque","Instrument Sans",system-ui,sans-serif;margin:0;line-height:1.1}
+a{color:inherit}
+.wrap{max-width:1060px;margin:0 auto;padding:0 18px}
+header.top{display:flex;justify-content:space-between;align-items:center;padding:16px 0}
+.logo{font:800 22px "Bricolage Grotesque",sans-serif;letter-spacing:-.5px}
+.logo b{color:var(--gold)}
+.btn{display:inline-block;border:0;border-radius:999px;padding:11px 20px;font:600 15px "Instrument Sans",sans-serif;cursor:pointer;background:var(--ink);color:var(--bg);text-decoration:none}
+.btn.gold{background:var(--gold);color:#fff}
+.btn.ghost{background:transparent;color:var(--ink);border:1.5px solid var(--line)}
+:focus-visible{outline:3px solid var(--teal);outline-offset:2px}
+.hero{padding:36px 0 26px}
+.hero h1{font-size:clamp(34px,7vw,64px);font-weight:800;letter-spacing:-1.5px;max-width:13ch}
+.hero p{color:var(--mute);max-width:46ch;margin:14px 0 22px;font-size:18px}
+.search{display:grid;gap:10px;grid-template-columns:2fr 1.3fr 1.3fr auto;background:var(--card);border:1.5px solid var(--line);border-radius:var(--r);padding:10px}
+.search input,.search select,.f input,.f select{width:100%;border:1.5px solid var(--line);background:var(--bg);color:var(--ink);border-radius:10px;padding:11px 12px;font:inherit}
+.chips{display:flex;gap:8px;overflow-x:auto;padding:16px 0 4px}
+.chip{flex:none;border:1.5px solid var(--line);background:transparent;color:var(--ink);border-radius:999px;padding:7px 14px;font:500 14px "Instrument Sans",sans-serif;cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.count{color:var(--mute);margin:18px 0 12px}
+.grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fill,minmax(280px,1fr))}
+.card{background:var(--card);border:1.5px solid var(--line);border-radius:var(--r);padding:18px;display:flex;flex-direction:column;gap:8px;cursor:pointer;text-align:left;color:inherit;font:inherit}
+.card:hover{border-color:var(--ink)}
+.card.prem{border-color:var(--gold);box-shadow:0 0 0 1.5px var(--gold)}
+.card h3{font-size:20px}
+.meta{color:var(--mute);font-size:14px}
+.tag{align-self:flex-start;font-size:12.5px;font-weight:600;padding:3px 10px;border-radius:999px;background:var(--goldbg);color:var(--gold)}
+.tag.f{background:transparent;border:1.5px solid var(--teal);color:var(--teal)}
+.empty{padding:36px;text-align:center;border:1.5px dashed var(--line);border-radius:var(--r);color:var(--mute)}
+section.plans{margin-top:56px;padding:44px 0;background:var(--card);border-top:1.5px solid var(--line)}
+section.plans h2{font-size:clamp(28px,5vw,42px);letter-spacing:-1px}
+.plans .sub{color:var(--mute);max-width:56ch;margin:10px 0 24px}
+.pgrid{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
+.plan{border:1.5px solid var(--line);border-radius:var(--r);padding:22px;display:flex;flex-direction:column;gap:10px;background:var(--bg)}
+.plan.best{border-color:var(--gold);box-shadow:0 0 0 1.5px var(--gold)}
+.price{font:800 38px "Bricolage Grotesque",sans-serif}
+.price small{font:500 15px "Instrument Sans",sans-serif;color:var(--mute)}
+.plan ul{margin:0 0 8px;padding-left:18px;color:var(--mute)}
+.plan li{margin:4px 0}
+.plan .btn{margin-top:auto;text-align:center}
+dialog{border:0;border-radius:var(--r);padding:24px;width:min(520px,calc(100vw - 28px));background:var(--card);color:var(--ink)}
+dialog::backdrop{background:rgba(10,15,30,.55)}
+.f{display:grid;gap:12px;margin-top:14px}
+.f label{display:grid;gap:5px;font-weight:600;font-size:14px}
+.row{display:flex;gap:10px;flex-wrap:wrap;margin-top:6px}
+.note{font-size:13px;color:var(--mute)}
+footer{padding:28px 0;color:var(--mute);font-size:14px}
+@media (max-width:720px){.search{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:no-preference){.card{transition:border-color .15s}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="logo">Gold<b>Events</b></div>
+    <a class="btn ghost" href="#plans">List your business</a>
+  </header>
+  <div class="hero">
+    <h1>Find the people who make events happen.</h1>
+    <p>Venues, caterers, DJs, photographers and planners. Browsing is free, with no account needed.</p>
+    <div class="search" role="search">
+      <input id="q" type="search" placeholder="Search name or service" aria-label="Search name or service">
+      <select id="cat" aria-label="Category"></select>
+      <select id="city" aria-label="Country"></select>
+      <button class="btn gold" id="go">Search</button>
+    </div>
+    <div class="chips" id="chips" role="group" aria-label="Quick categories"></div>
+  </div>
+  <div class="count" id="count" aria-live="polite"></div>
+  <div class="grid" id="grid"></div>
+</div>
+
+<section class="plans" id="plans">
+  <div class="wrap">
+    <h2>Get listed. Get booked.</h2>
+    <p class="sub">Customers browse for free. Businesses pay a simple monthly fee in US dollars to appear in the directory. Cancel any time.</p>
+    <div class="pgrid">
+      <div class="plan"><h3>Basic</h3><div class="price">$19<small>/month</small></div>
+      <ul><li>1 category listing</li><li>Description and contact details</li><li>1 photo</li></ul>
+      <button class="btn ghost" data-plan="Basic">Choose Basic</button></div>
+      <div class="plan best"><span class="tag">Most popular</span><h3>Featured</h3><div class="price">$49<small>/month</small></div>
+      <ul><li>Ranked above Basic in results</li><li>Up to 3 categories</li><li>5 photos and website link</li><li>Featured badge</li></ul>
+      <button class="btn gold" data-plan="Featured">Choose Featured</button></div>
+      <div class="plan"><h3>Premium</h3><div class="price">$99<small>/month</small></div>
+      <ul><li>Top of results, highlighted</li><li>Unlimited categories and photos</li><li>Enquiry inbox for customers</li><li>Home page spotlight</li></ul>
+      <button class="btn ghost" data-plan="Premium">Choose Premium</button></div>
+    </div>
+    <p class="note" style="margin-top:16px">All prices and payments are in US dollars (USD) only. Prices are placeholders; payment in this demo is simulated.</p>
+  </div>
+</section>
+<div class="wrap"><footer>Gold Events directory. Free for customers, paid listings for businesses.</footer></div>
+
+<dialog id="view"><div id="viewBody"></div><div class="row"><button class="btn ghost" data-close>Close</button></div></dialog>
+
+<dialog id="list">
+  <h3 id="listTitle">List your business</h3>
+  <div class="f" id="form">
+    <label>Business name<input id="fn" maxlength="60"></label>
+    <label>Category<select id="fc"></select></label>
+    <label>Country<select id="fci"></select></label>
+    <label>Short description<input id="fd" maxlength="140"></label>
+    <label>Contact email or phone<input id="fe" maxlength="60"></label>
+    <label>Plan<select id="fp"><option>Basic</option><option>Featured</option><option>Premium</option></select></label>
+    <div class="note" id="err" role="alert"></div>
+    <div class="row"><button class="btn gold" id="pay">Pay and publish</button><button class="btn ghost" data-close>Cancel</button></div>
+  </div>
+</dialog>
+
+<script>
+var CATS=["Venues","Catering","DJs and music","Photography","Videography","Planners","Florists","Decor and lighting","Rentals","Photo booths","Mascots","Bouncy castles","Valet","Entertainers","Speakers","Audio visual","Bars and drinks","Cakes and desserts","Transport","Event staff","Security","Ticketing","Advertising","Billboard advertising"];
+var PRICE={Basic:19,Featured:49,Premium:99},RANK={Premium:0,Featured:1,Basic:2};
+var data=[
+{n:"Harbor Hall",c:"Venues",ci:"United States",d:"Waterfront ballroom for up to 300 guests, with in-house setup crew.",e:"book@harborhall.example",p:"Premium"},
+{n:"Saffron & Sage Catering",c:"Catering",ci:"Jamaica",d:"Seasonal menus for weddings and corporate dinners.",e:"hello@saffronsage.example",p:"Featured"},
+{n:"Night Owl Sound",c:"DJs and music",ci:"Trinidad and Tobago",d:"DJs and live bands for weddings, galas and fundraisers.",e:"bookings@nightowl.example",p:"Featured"},
+{n:"Lumen Photo Co.",c:"Photography",ci:"Barbados",d:"Event and portrait photography with 48-hour previews.",e:"studio@lumen.example",p:"Basic"},
+{n:"Everafter Planning",c:"Planners",ci:"Bahamas",d:"Full-service and day-of coordination for weddings.",e:"plan@everafter.example",p:"Premium"},
+{n:"Petal Row",c:"Florists",ci:"Puerto Rico",d:"Arches, centerpieces and bouquets, delivered and styled.",e:"hello@petalrow.example",p:"Basic"},
+{n:"Tent & Table Rentals",c:"Rentals",ci:"Dominican Republic",d:"Tents, tables, linens and lighting for any size of event.",e:"orders@tenttable.example",p:"Basic"},
+{n:"The Glasshouse",c:"Venues",ci:"Cayman Islands",d:"Garden venue with an indoor glass pavilion for 120.",e:"events@glasshouse.example",p:"Featured"}];
+var $=function(i){return document.getElementById(i)};
+function esc(s){return String(s).replace(/[&<>"']/g,function(m){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]})}
+function fill(sel,items,first){sel.innerHTML=(first?'<option value="">'+first+'</option>':'')+items.map(function(x){return'<option>'+esc(x)+'</option>'}).join('')}
+var COUNTRIES=["Anguilla","Australia","Canada","Germany","Ghana","India","Ireland","Japan","Kenya","New Zealand","Nigeria","Singapore","South Africa","United Arab Emirates","United Kingdom","Antigua and Barbuda","Aruba","Bahamas","Barbados","Belize","Bermuda","Bonaire, Sint Eustatius and Saba","British Virgin Islands","Cambodia","Cayman Islands","Cuba","Curaçao","Dominica","Dominican Republic","Ecuador","El Salvador","Grenada","Guadeloupe","Guyana","Haiti","Jamaica","Liberia","Martinique","Montserrat","Panama","Puerto Rico","Saint Barthélemy","Saint Kitts and Nevis","Saint Lucia","Saint Martin","Saint Vincent and the Grenadines","Sint Maarten","Suriname","Timor-Leste","Trinidad and Tobago","Turks and Caicos Islands","United States","US Virgin Islands","Zimbabwe","American Samoa","Guam","Marshall Islands","Micronesia","Northern Mariana Islands","Palau"].sort(function(a,b){return a.localeCompare(b)});function cities(){return COUNTRIES}
+function setup(){
+  fill($('cat'),CATS,'All categories');fill($('fc'),CATS);fill($('fci'),COUNTRIES);refreshCities();
+  $('chips').innerHTML=['All'].concat(CATS).map(function(c,i){return'<button class="chip" aria-pressed="'+(i===0)+'" data-c="'+(i?esc(c):'')+'">'+esc(c)+'</button>'}).join('');
+}
+function refreshCities(){var cur=$('city').value;fill($('city'),cities(),'All countries');$('city').value=cur}
+function render(){
+  var q=$('q').value.trim().toLowerCase(),c=$('cat').value,ci=$('city').value;
+  var r=data.filter(function(x){return(!c||x.c===c)&&(!ci||x.ci===ci)&&(!q||(x.n+' '+x.d+' '+x.c).toLowerCase().indexOf(q)>-1)})
+   .sort(function(a,b){return RANK[a.p]-RANK[b.p]});
+  $('count').textContent=r.length+(r.length===1?' business':' businesses');
+  $('grid').innerHTML=r.length?r.map(function(x){var i=data.indexOf(x);
+   return'<button class="card'+(x.p==='Premium'?' prem':'')+'" data-i="'+i+'">'+(x.p!=='Basic'?'<span class="tag'+(x.p==='Featured'?' f':'')+'">'+x.p+'</span>':'')+'<h3>'+esc(x.n)+'</h3><div class="meta">'+esc(x.c)+' in '+esc(x.ci)+'</div><div>'+esc(x.d)+'</div></button>'}).join(''):
+   '<div class="empty" style="grid-column:1/-1">No matches. Try another category or country, or <a href="#plans">list your business</a> here.</div>';
+  Array.prototype.forEach.call(document.querySelectorAll('.chip'),function(b){b.setAttribute('aria-pressed',String((b.dataset.c||'')===c))});
+}
+document.addEventListener('click',function(e){
+  var t=e.target;
+  if(t.closest('[data-close]')){t.closest('dialog').close();return}
+  var ch=t.closest('.chip');if(ch){$('cat').value=ch.dataset.c;render();return}
+  var cd=t.closest('.card');if(cd){var x=data[+cd.dataset.i];
+   $('viewBody').innerHTML='<h3>'+esc(x.n)+'</h3><p class="meta">'+esc(x.c)+' in '+esc(x.ci)+'</p><p>'+esc(x.d)+'</p><p><b>Contact:</b> '+esc(x.e)+'</p>';$('view').showModal();return}
+  var pl=t.closest('[data-plan]');if(pl){$('fp').value=pl.dataset.plan;$('err').textContent='';$('list').showModal()}
+});
+$('go').onclick=render;$('q').oninput=render;$('cat').onchange=render;$('city').onchange=render;
+$('pay').onclick=function(){
+  var v=function(i){return $(i).value.trim()};
+  if(!v('fn')||!v('fci')||!v('fd')||!v('fe')){$('err').textContent='Fill in every field to publish your listing.';return}
+  var p=$('fp').value;
+  data.push({n:v('fn'),c:$('fc').value,ci:v('fci'),d:v('fd'),e:v('fe'),p:p});
+  ['fn','fd','fe'].forEach(function(i){$(i).value=''});
+  $('list').close();refreshCities();$('q').value='';$('cat').value='';$('city').value='';render();
+  $('count').textContent='Published on the '+p+' plan (US$'+PRICE[p]+'/month, simulated). '+$('count').textContent;
+  window.scrollTo(0,0);
+};
+setup();render();
+</script>
+</body>
+</html>
