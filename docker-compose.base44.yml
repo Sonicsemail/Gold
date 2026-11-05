@@ -1,0 +1,25 @@
+services:
+  web:
+    # Plain Python runtime: the repo directory is mode 0700 root, which a
+    # non-root server user (e.g. nginx's "nginx") cannot traverse.
+    image: python:3.12-alpine
+    working_dir: /srv
+    command: ["python", "-m", "http.server", "3000", "--bind", "0.0.0.0", "--directory", "/srv"]
+    ports:
+      - "3000:3000"
+    volumes:
+      # Serve the checkout itself, so edits to index.html show up on reload.
+      - ./:/srv:ro
+    restart: on-failure
+    labels:
+      base44.project: "Gold Events"
+      base44.kind: "web"
+      base44.port: "3000"
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - python -c "import urllib.request,sys; sys.exit(0 if b'Gold Events' in urllib.request.urlopen('http://127.0.0.1:3000/').read() else 1)"
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 5s
